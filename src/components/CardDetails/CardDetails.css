@@ -121,10 +121,13 @@ hr {
     align-content: center;
 }
 
-.close {
-    padding: 1em;
-    background-color: #F8FBFF;
+.minimize {
+    background-color: #282E44;
+    padding: 0;
     border: none;
-    border-radius: 20px;
-    margin: 2vmin 1vmin;
+    margin: auto 1vmin;
+}
+
+.minimizeIcon {
+    width: 4vmin;
 }

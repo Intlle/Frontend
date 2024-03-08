@@ -1,5 +1,6 @@
 import { useNavigate } from 'react-router-dom';
 import './CardDetails.css'
+import minimizeIcon from '../../assets/minimize_icon.svg'
 
 function CardDetails() {
     const navigate = useNavigate();
@@ -29,7 +30,7 @@ function CardDetails() {
                 <button className='btn'>начать занятие</button>
                 <button className='btn'>статистика</button>
                 <button className='btn'>удалить карточку</button>
-                <button className='close' onClick={() => navigate('/')}> </button>
+                <button className='minimize' onClick={() => navigate('/')}><img src={minimizeIcon} className='minimizeIcon' alt='Свернуть' /></button>
             </div>
         </div>
     );
