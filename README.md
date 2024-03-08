@@ -1,8 +1,19 @@
-# React + Vite
+# Intlle (INTeLLingencE)
+Mind maps and flash cards combined into a single package./ 
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+---
 
-Currently, two official plugins are available:
+# Installation process
+Make sure [Node.js](https://nodejs.org/en) is installed and configured on your system. 
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+Open the terminal and move to the project's directory (usually this can be achieved through the *cd* command; as an example:
+> cd C:\Projects\Intlle\
+
+After that, type:
+> npm install
+
+---
+
+# Launching the project
+To launch the project after the installation, simply use:
+> npm run dev 
