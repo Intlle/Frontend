@@ -11,7 +11,7 @@ import ControlPanel from'../components/ControlPanel/ControlPanel.jsx';
 import styles from './Nodes.module.css';
 
 const initialNodes = [
-  { id: '1', position: { x: 550, y: 350 }, data: { label: '1', color: 'white' } },
+  { id: '1', position: { x: 550, y: 350 }, data: { label: '1'}},
 ]; 
 const initialEdges = [{ id: 'e1-2' }];
 
@@ -27,30 +27,16 @@ const addNode = (setNodes, nodes) => {
     },
   ]);
 };
+
 const getPosition = () => ({
-  x: Math.random() * 300,
-  y: Math.random() * 100,
+  x:300,
+  y:350,
 });
+
 export default function Nodes() {
   const [nodes, setNodes, onNodesChange] = useNodesState(initialNodes);
   const [edges, setEdges, onEdgesChange] = useEdgesState(initialEdges);
   const onConnect = useCallback((params) => setEdges((eds) => addEdge(params, eds)), [setEdges]);
-  const handleChangeColor = (color) => {
-    const updatedNodes = nodes.map((node) => {
-      if (node.id === '1') {
-        return {
-          ...node,
-          data: {
-            ...node.data,
-            color,
-          },
-        };
-      }
-      return node;
-    });
-    setNodes(updatedNodes);
-  };
-
   return (
     <div className={styles.body}>
       <div style={{ width: '220%', display: 'flex', height: '100vh' }}>
@@ -59,7 +45,7 @@ export default function Nodes() {
           onChangeColor={handleChangeColor}/>
         </div>
 
-        <div style={{ flex: 1, position: 'bottom' }}>
+        <div className = 'custom-reactflow' style={{ flex: 1, position: 'bottom', width: '196vh', height: '96vh' }}>
           <ReactFlow
             nodes={nodes}
             edges={edges}
@@ -71,7 +57,7 @@ export default function Nodes() {
               <button className={styles.button} onClick={() => addNode(setNodes, nodes)}>Добавить узел</button>
             </Controls>
 
-            <Background className={styles.customReactflow} variant="none" />
+            <Background className={styles.customReactflow} variant="dots" />
           </ReactFlow>
         </div>
       </div>
