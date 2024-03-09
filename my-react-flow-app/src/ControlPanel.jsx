@@ -1,22 +1,50 @@
+
 import React from 'react';
 
-function ControlPanel({ onChangeColor }) {
-    return (
-      <div className='controlpanel'>
-        <h1 className='h1'>Панель управления</h1>
-        <button className='button'>Размер 1</button>
-        <button className='button'>Размер 2</button>
-        <button className='button'>Размер 3</button>
-        <button className='button' style={{ backgroundColor: 'red' }} onClick={() => onChangeColor('red')}>
-          Красный
-        </button>
-        <button className='button' style={{ backgroundColor: 'yellow' }} onClick={() => onChangeColor('yellow')}>
-          Желтый
-        </button>
-        <button className='button' style={{ backgroundColor: 'green' }} onClick={() => onChangeColor('green')}>
-          Зеленый
-        </button>
-      </div>
-    );
-  }
+const createProjectSchema = (nodes, edges) => {
+  return JSON.stringify({ nodes, edges }, null, 2);
+};
+
+const downloadFile = (content, fileName) => {
+  const blob = new Blob([content], { type: 'application/json' });
+  const link = document.createElement('a');
+  link.href = window.URL.createObjectURL(blob);
+  link.download = fileName;
+  document.body.appendChild(link);
+  link.click();
+  document.body.removeChild(link);
+};
+
+const ControlPanel = ({ nodes, edges }) => {
+  const handleButtonClick = (action) => {
+    switch (action) {
+      case 'new-schema':
+        window.open('http://localhost:5173');
+        break;
+      case 'open-file':
+        const input = document.createElement('input');
+        input.type = 'file';
+        input.click();
+        break;
+      case 'save-locally':
+        const projectSchema = createProjectSchema(nodes, edges);
+        downloadFile(projectSchema, 'project-schema.json');
+        break;
+      default:
+        break;
+    }
+  };
+
+  return (
+    <div className="control-panel">
+      <button onClick={() => handleButtonClick('new-schema')}>Новая схема</button>
+      <button onClick={() => handleButtonClick('open-file')}>Открыть файл</button>
+      <button onClick={() => handleButtonClick('save-locally')}>Сохранить локально</button>
+      <button onClick={() => handleButtonClick('save-server')}>Сохранить на сервере</button>
+      <button onClick={() => handleButtonClick('settings')}>Настройки</button>
+      <button onClick={() => handleButtonClick('info')}>Информация</button>
+    </div>
+  );
+};
+
 export default ControlPanel;
