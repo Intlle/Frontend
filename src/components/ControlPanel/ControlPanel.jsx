@@ -32,10 +32,11 @@ const handleButtonClick = (action) => {
     default:
       break;
   }
+};
 
 function ControlPanel({ nodes, edges }) {
   return (
-    <div className={styles.controlpanel}>
+    <div className={styles.controlPanel}>
       <button onClick={() => handleButtonClick('new-schema')}>Новая схема</button>
       <button onClick={() => handleButtonClick('open-file')}>Открыть файл</button>
       <button onClick={() => handleButtonClick('save-locally')}>Сохранить локально</button>
@@ -45,4 +46,5 @@ function ControlPanel({ nodes, edges }) {
     </div>
   );
 }
+
 export default ControlPanel;

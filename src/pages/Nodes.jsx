@@ -38,29 +38,22 @@ export default function Nodes() {
   const [edges, setEdges, onEdgesChange] = useEdgesState(initialEdges);
   const onConnect = useCallback((params) => setEdges((eds) => addEdge(params, eds)), [setEdges]);
   return (
-    <div className={styles.body}>
-      <div style={{ width: '220%', display: 'flex', height: '100vh' }}>
-        <div style={{ width: '10%', backgroundColor: '#111a3c', padding: '20px' }}>
-          <ControlPanel
-          onChangeColor={handleChangeColor}/>
-        </div>
-
-        <div className = 'custom-reactflow' style={{ flex: 1, position: 'bottom', width: '196vh', height: '96vh' }}>
-          <ReactFlow
-            nodes={nodes}
-            edges={edges}
-            onNodesChange={onNodesChange}
-            onEdgesChange={onEdgesChange}
-            onConnect={onConnect}
-          >
-            <Controls className={styles.control} >
-              <button className={styles.button} onClick={() => addNode(setNodes, nodes)}>Добавить узел</button>
-            </Controls>
-
-            <Background className={styles.customReactflow} variant="dots" />
-          </ReactFlow>
-        </div>
+    <div className={styles.appContainer}>
+      <div className={styles.customReactflow} style={{ width: '196vh', height: '96vh' }}>
+        <ReactFlow
+          nodes={nodes}
+          edges={edges}
+          onNodesChange={onNodesChange}
+          onEdgesChange={onEdgesChange}
+          onConnect={onConnect}
+        >
+          <Controls className={styles.control} >
+            <button className={styles.button} onClick={() => addNode(setNodes, nodes)}>Добавить узел</button>
+          </Controls>
+          <Background variant="dots" />
+        </ReactFlow>
       </div>
+      <ControlPanel />
     </div>
   );
 }
