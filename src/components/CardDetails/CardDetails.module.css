@@ -1,0 +1,124 @@
+.window {
+    background-color: #282E44;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    font-weight: 700;
+    letter-spacing: 0.1em;
+}
+
+.title {
+    color: #F8FBFF;
+    text-align: center;
+    font-size: 60px;
+    letter-spacing: 0.1em;
+    margin: 0.1em;
+}
+
+.description {
+    color:#F8FBFF;
+    font-size: 28px;
+    width: 80vw;
+    min-height: 35vh;
+    padding: 1.5em;
+    border: solid 4px #F8FBFF;
+    border-radius: 26px;
+    background-color: #212639;
+    margin: 1vmin;
+}
+
+.groupBox {
+    display: flex;
+    flex-direction: row;
+}
+
+.pGroup {
+    font-size: 18px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+    margin: 3vmin 2vmin;
+    padding: 4vmin 6vmin;
+    border-radius: 26px;
+    background-color: #1B212F;
+    color: #F8FBFF;
+    width: 38vw;
+}
+
+.btnGroup {
+    font-size: 18px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+    margin: 3vmin 2vmin;
+    padding: 1vmin 6vmin;
+    border-radius: 26px;
+    background-color: #F8FBFF;
+    color: #1B212F;
+    width: 28vw;
+}
+
+.pGroup p {
+    padding: 0.6em 0;
+    margin: 0;
+}
+
+.btnGroup button {
+    font-size: 18px;
+    font-weight: 700;
+    color: #1B212F;
+    background-color: #F8FBFF;
+    border: none;
+    border-radius: 18px;
+    padding: 0.8em;
+}
+
+.btnGroup button:hover {
+    background-color: #D2D2D2;
+}
+
+.btn {
+    font-size: 18px;
+    font-weight: 700;
+    color: #1B212F;
+    background-color: #F8FBFF;
+    border: none;
+    border-radius: 18px;
+    padding: 1em 4em;
+    margin: 2vmin 1vmin;
+}
+
+.btn:hover {
+    background-color: #D2D2D2;
+}
+
+.btnGroup hr {
+    width: 70%;
+    border: 1px solid;
+    border-color: #D2D2D2; 
+}
+
+.pGroup hr {
+    width: 70%;
+    border: 1px solid;
+    border-color: #464E65;
+}
+
+.btnLine {
+    display: flex;
+    justify-content: center;
+    align-content: center;
+}
+
+.minimize {
+    background-color: #282E44;
+    padding: 0;
+    border: none;
+    margin: auto 1vmin;
+    font-size: 0;
+}
+
+.minimizeIcon {
+    width: 4vmin;
+}

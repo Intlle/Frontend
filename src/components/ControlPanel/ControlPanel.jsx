@@ -1,5 +1,5 @@
-
 import React from 'react';
+import styles from './ControlPanel.module.css'
 
 const createProjectSchema = (nodes, edges) => {
   return JSON.stringify({ nodes, edges }, null, 2);
@@ -15,28 +15,27 @@ const downloadFile = (content, fileName) => {
   document.body.removeChild(link);
 };
 
-const ControlPanel = ({ nodes, edges }) => {
-  const handleButtonClick = (action) => {
-    switch (action) {
-      case 'new-schema':
-        window.open('http://localhost:5173');
-        break;
-      case 'open-file':
-        const input = document.createElement('input');
-        input.type = 'file';
-        input.click();
-        break;
-      case 'save-locally':
-        const projectSchema = createProjectSchema(nodes, edges);
-        downloadFile(projectSchema, 'project-schema.json');
-        break;
-      default:
-        break;
-    }
-  };
+const handleButtonClick = (action) => {
+  switch (action) {
+    case 'new-schema':
+      window.open('http://localhost:5173');
+      break;
+    case 'open-file':
+      const input = document.createElement('input');
+      input.type = 'file';
+      input.click();
+      break;
+    case 'save-locally':
+      const projectSchema = createProjectSchema(nodes, edges);
+      downloadFile(projectSchema, 'project-schema.json');
+      break;
+    default:
+      break;
+  }
 
+function ControlPanel({ nodes, edges }) {
   return (
-    <div className="control-panel">
+    <div className={styles.controlpanel}>
       <button onClick={() => handleButtonClick('new-schema')}>Новая схема</button>
       <button onClick={() => handleButtonClick('open-file')}>Открыть файл</button>
       <button onClick={() => handleButtonClick('save-locally')}>Сохранить локально</button>
@@ -45,6 +44,5 @@ const ControlPanel = ({ nodes, edges }) => {
       <button onClick={() => handleButtonClick('info')}>Информация</button>
     </div>
   );
-};
-
+}
 export default ControlPanel;
