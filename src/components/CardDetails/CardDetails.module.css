@@ -8,16 +8,12 @@
     letter-spacing: 0.1em;
 }
 
-h1 {
+.title {
     color: #F8FBFF;
     text-align: center;
     font-size: 60px;
     letter-spacing: 0.1em;
     margin: 0.1em;
-}
-
-p {
-    margin: 0;
 }
 
 .description {
@@ -32,12 +28,12 @@ p {
     margin: 1vmin;
 }
 
-.group-box {
+.groupBox {
     display: flex;
     flex-direction: row;
 }
 
-.p-group {
+.pGroup {
     font-size: 18px;
     display: flex;
     flex-direction: column;
@@ -45,9 +41,12 @@ p {
     margin: 3vmin 2vmin;
     padding: 4vmin 6vmin;
     border-radius: 26px;
+    background-color: #1B212F;
+    color: #F8FBFF;
+    width: 38vw;
 }
 
-.btn-group {
+.btnGroup {
     font-size: 18px;
     display: flex;
     flex-direction: column;
@@ -55,25 +54,17 @@ p {
     margin: 3vmin 2vmin;
     padding: 1vmin 6vmin;
     border-radius: 26px;
-}
-
-.p-group {
-    background-color: #1B212F;
-    color: #F8FBFF;
-    width: 38vw;
-}
-
-.btn-group {
     background-color: #F8FBFF;
     color: #1B212F;
     width: 28vw;
 }
 
-.p-group p {
+.pGroup p {
     padding: 0.6em 0;
+    margin: 0;
 }
 
-.btn-group button {
+.btnGroup button {
     font-size: 18px;
     font-weight: 700;
     color: #1B212F;
@@ -83,7 +74,7 @@ p {
     padding: 0.8em;
 }
 
-.btn-group button:hover {
+.btnGroup button:hover {
     background-color: #D2D2D2;
 }
 
@@ -102,20 +93,19 @@ p {
     background-color: #D2D2D2;
 }
 
-hr {
+.btnGroup hr {
     width: 70%;
     border: 1px solid;
-}
-
-.btn-group hr {
     border-color: #D2D2D2; 
 }
 
-.p-group hr {
+.pGroup hr {
+    width: 70%;
+    border: 1px solid;
     border-color: #464E65;
 }
 
-.btn-line {
+.btnLine {
     display: flex;
     justify-content: center;
     align-content: center;
@@ -126,6 +116,7 @@ hr {
     padding: 0;
     border: none;
     margin: auto 1vmin;
+    font-size: 0;
 }
 
 .minimizeIcon {

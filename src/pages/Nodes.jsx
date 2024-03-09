@@ -8,6 +8,7 @@ import ReactFlow, {
 } from 'reactflow';
 import 'reactflow/dist/style.css';
 import ControlPanel from'../components/ControlPanel/ControlPanel.jsx';
+import styles from './Nodes.module.css';
 
 const initialNodes = [
   { id: '1', position: { x: 550, y: 350 }, data: { label: '1', color: 'white' } },
@@ -51,26 +52,28 @@ export default function Nodes() {
   };
 
   return (
-    <div style={{ width: '220%', display: 'flex', height: '100vh' }}>
-      <div style={{ width: '10%', backgroundColor: '#111a3c', padding: '20px' }}>
-        <ControlPanel
-         onChangeColor={handleChangeColor}/>
-      </div>
+    <div className={styles.body}>
+      <div style={{ width: '220%', display: 'flex', height: '100vh' }}>
+        <div style={{ width: '10%', backgroundColor: '#111a3c', padding: '20px' }}>
+          <ControlPanel
+          onChangeColor={handleChangeColor}/>
+        </div>
 
-      <div style={{ flex: 1, position: 'bottom' }}>
-        <ReactFlow
-          nodes={nodes}
-          edges={edges}
-          onNodesChange={onNodesChange}
-          onEdgesChange={onEdgesChange}
-          onConnect={onConnect}
-        >
-          <Controls className = 'control'>
-            <button onClick={() => addNode(setNodes, nodes)}>Добавить узел</button>
-          </Controls>
+        <div style={{ flex: 1, position: 'bottom' }}>
+          <ReactFlow
+            nodes={nodes}
+            edges={edges}
+            onNodesChange={onNodesChange}
+            onEdgesChange={onEdgesChange}
+            onConnect={onConnect}
+          >
+            <Controls className = {styles.control} >
+              <button onClick={() => addNode(setNodes, nodes)}>Добавить узел</button>
+            </Controls>
 
-          <Background className="custom-reactflow" variant="none" />
-        </ReactFlow>
+            <Background className={styles.customReactflow} variant="none" />
+          </ReactFlow>
+        </div>
       </div>
     </div>
   );
