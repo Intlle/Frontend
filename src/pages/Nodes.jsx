@@ -67,8 +67,8 @@ export default function Nodes() {
             onEdgesChange={onEdgesChange}
             onConnect={onConnect}
           >
-            <Controls className = {styles.control} >
-              <button onClick={() => addNode(setNodes, nodes)}>Добавить узел</button>
+            <Controls className={styles.control} >
+              <button className={styles.button} onClick={() => addNode(setNodes, nodes)}>Добавить узел</button>
             </Controls>
 
             <Background className={styles.customReactflow} variant="none" />
