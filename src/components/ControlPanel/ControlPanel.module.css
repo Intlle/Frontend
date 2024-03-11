@@ -23,6 +23,6 @@
     border-radius: 8px;
 }
 
-.controlPanel button :hover {
+.controlPanel button:hover {
     background-color: #39353586;
 }
