@@ -1,5 +1,5 @@
 # Intlle (INTeLLingencE)
-Mind maps and flash cards combined into a single package./ 
+Mind maps and flash cards combined into a single package./ <br>
 Live preview: https://intlle.github.io/Frontend/
 ---
 
