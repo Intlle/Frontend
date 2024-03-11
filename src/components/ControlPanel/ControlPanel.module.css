@@ -4,7 +4,7 @@
     right: 20px;
     display: flex;
     flex-direction:column;
-    background-color: #fcfcfc;
+    background-color: #fcfcfcee;
     border-radius: 10%;
     width: 200px;
 }
@@ -14,15 +14,13 @@
     font-weight: 500;
     font-family: inherit;
     size: 10px;
-    background-color: rgba(0, 0, 0, 0);
     border: none;
     padding: 10px;
     color: #000000;
     cursor: pointer;
-    transition: background-color 0.3s ease,color 0.3s ease;
-    border-radius: 8px;
+    border-radius: 20px;
 }
 
-.controlPanel button :hover {
-    background-color: #39353586;
+.controlPanel button:hover {
+    background-color: #ffffffb1;
 }
