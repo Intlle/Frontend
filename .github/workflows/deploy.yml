@@ -1,0 +1,49 @@
+name: Deploy
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  build:
+    name: Build
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: checkout repository
+        uses: actions/checkout@v4
+
+      - name: setup nodejs
+        uses: actions/setup-node@v4
+
+      - name: install dependencies
+        uses: bahmutov/npm-install@v1
+
+      - name: build project
+        run: npm run build
+
+      - name: upload production
+        uses: actions/upload-artifact@v3
+        with:
+          name: production
+          path: ./dist
+          
+  deploy:
+      name: Deploy
+      needs: build
+      runs-on: ubuntu-latest
+      if: github.ref == 'refs/heads/main'
+
+      steps:
+        - name: download artifact
+          uses: actions/download-artifact@v3
+          with:
+            name: production
+            path: ./dist
+
+        - name: github pages
+          uses: peaceiris/actions-gh-pages@v3
+          with: 
+            github_token: ${{ secrets.GITHUB_TOKEN }}
+            publish_dir: ./dist

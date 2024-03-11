@@ -46,7 +46,7 @@ export default function Nodes() {
   const onConnect = useCallback((params) => setEdges((eds) => addEdge(params, eds)), [setEdges]);
 
   return (
-    <div className={styles.app_container}>
+    <div className={styles.appContainer}>
       <div className={styles.customReactflow} style={{ width: '196vh', height: '96vh' }}>
         <ReactFlow
           nodes={nodes}
