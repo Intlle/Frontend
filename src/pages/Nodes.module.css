@@ -1,10 +1,21 @@
-.body {
+.appContainer {
   margin: 0;
   display: flex;
   place-items: center;
   min-width: 320px;
-  min-height: 100vh;
+  height: 100vh;
   position: relative;
+}
+
+.customReactflow {
+  width: 100%;
+  height: 98vh;
+  background-color:#0b122f;
+  padding: 1vh;
+}
+
+.control {
+  background-color: #111a3c;
 }
 
 .button {
@@ -31,12 +42,11 @@
 .react-flow__node {
   background-color: var(--node-color, white);
 }
-.control {
-  background-color: #111a3c;
-}
-.customReactflow {
-  width: 100%;
-  height: 100%;
-  background-color:#0b122f;
-  padding: 10px;
+
+.custom-node {
+  background-color: #61dafb;
+  border: 2px solid #0b122f;
+  border-radius: 8px;
+  padding: 8px;
+  color: #8f118c;
 }

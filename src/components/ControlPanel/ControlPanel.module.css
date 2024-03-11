@@ -1,9 +1,4 @@
-.h1 {
-    font-size: 20px;
-    color: rgb(255, 255, 255);
-}
-
-.controlpanel {
+.controlPanel {
     position: absolute;
     top: 20px;
     right: 20px;
@@ -14,8 +9,10 @@
     width: 200px;
 }
 
-.button {
+.controlPanel button {
     font-size: 15px;
+    font-weight: 500;
+    font-family: inherit;
     size: 10px;
     background-color: rgba(0, 0, 0, 0);
     border: none;
@@ -23,13 +20,9 @@
     color: #000000;
     cursor: pointer;
     transition: background-color 0.3s ease,color 0.3s ease;
+    border-radius: 8px;
 }
 
-.button:hover {
+.controlPanel button:hover {
     background-color: #39353586;
-}
-
-.button:focus,
-.button:focus-visible {
-    outline: 4px auto -webkit-focus-ring-color;
 }
