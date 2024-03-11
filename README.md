@@ -1,6 +1,6 @@
 # Intlle (INTeLLingencE)
 Mind maps and flash cards combined into a single package./ 
-
+Live preview: https://intlle.github.io/Frontend/
 ---
 
 # Installation process
