@@ -10,22 +10,17 @@ import ReactFlow, {
 import maximisationIcon from '../assets/expand_icon.svg';
 import CustomNode from '../components/CustomNode/CustomNode.jsx'
 import CustomEdge from '../components/CustomEdge/CustomEdge.jsx'
+import '../components/CustomNode/Custom.css'
 import 'reactflow/dist/style.css';
 import ControlPanel from'../components/ControlPanel/ControlPanel.jsx';
 import styles from './Nodes.module.css';
 import NodeEditor from '../components/NodeEditor/NodeEditor.jsx';
+import CardPage from '../components/CardPage/CardPage.jsx';
 
 
-const nodeTypes = {
-  customNode: CustomNode,
-};
-
-const edgeTypes = {
-  customEdge: CustomEdge,
-};
 
 const initialNodes = [
-  { id: '1', position: { x: 650, y: 350 }, data:  { label: 'Node 1', description: 'Some description for Node 1' }},
+  { id: '1', type: 'customNode' ,position: { x: 650, y: 350 }, data:  { label: 'Node 1', description: 'Some description for Node 1' }},
 ]; 
 const initialEdges = [{ id: 'e1-2' }];
 
@@ -40,6 +35,7 @@ const addNode = (setNodes, nodes) => {
     ...prev,
     {
       id: nextId.toString(),
+      type: 'customNode', 
       position: getPosition(),
       data: { label: `Node ${nextId}`, description: `Some description for Node ${nextId}` },
     },
@@ -47,21 +43,53 @@ const addNode = (setNodes, nodes) => {
 };
 
 
+const nodeTypes = {
+  customNode: CustomNode,
+};
+
+const edgeTypes = {
+  customEdge: CustomEdge,
+};
+
+export const NodeUpdateContext = React.createContext({
+  updateNode: () => {},
+  updateNodeColor: () => {},
+  updateNodeSize: () => {}
+});
 export default function Nodes() {
   const [nodes, setNodes, onNodesChange] = useNodesState(initialNodes);
   const [edges, setEdges, onEdgesChange] = useEdgesState(initialEdges);
-  const [selectedNode, setSelectedNode] = useState(null);
+  const [selectedNodeLabel, setSelectedNodeLabel] = useState('');
   const navigate = useNavigate();
+
   const onNodeClick = (event, node) => {
     event.preventDefault();
-    setSelectedNode(node.data);
-    setNodeName(node.data.label);
+    setSelectedNodeLabel(node.data.label);
   };
+
   const onConnect = useCallback((params) => setEdges((eds) => addEdge(params, eds)), [setEdges]);
+
+  const updateNode = (newLabel, newDescription) => {
+    const updatedNodes = nodes.map((node) => {
+      if (node.data.label === selectedNodeLabel) {
+        return {
+          ...node,
+          data: {
+            ...node.data,
+            label: newLabel,
+            description: newDescription,
+          },
+        };
+      }
+      return node;
+    });
+    setNodes(updatedNodes);
+  };
+
   const updateNodeColor = (color) => {
-    if (selectedNode) {
+    if (selectedNodeLabel) {
       const updatedNodes = nodes.map((node) => {
-        if (node.id === selectedNode.id) {
+        if (node.data.label === selectedNodeLabel) {
           return {
             ...node,
             data: {
@@ -73,13 +101,14 @@ export default function Nodes() {
         return node;
       });
       setNodes(updatedNodes);
+      console.log('Updated nodes:', updatedNodes);
     }
   };
   
   const updateNodeSize = (size) => {
-    if (selectedNode) {
+    if (selectedNodeLabel) {
       const updatedNodes = nodes.map((node) => {
-        if (node.id === selectedNode.id) {
+        if (node.data.label === selectedNodeLabel) {
           return {
             ...node,
             data: {
@@ -91,51 +120,36 @@ export default function Nodes() {
         return node;
       });
       setNodes(updatedNodes);
+      console.log('Updated nodes:', updatedNodes);
     }
   };
-
-  const onApply = (color, size) => {
+  
+  const onApplyChanges = (color, size) => {
     updateNodeColor(color);
     updateNodeSize(size);
+   
   };
 
-  const updateEdge = (edgeId, newSource, newTarget) => {
-    const updatedEdges = edges.map((edge) => {
-      if (edge.id === edgeId) {
+  const onChange = useCallback((newLabel) => {
+    const updatedNodes = nodes.map((node) => {
+      if (node.data.label === selectedNodeLabel) {
         return {
-          ...edge,
-          source: newSource,
-          target: newTarget,
+          ...node,
+          data: {
+            ...node.data,
+            label: newLabel,
+            
+          },
         };
       }
-      return edge;
+      return node;
     });
-    setEdges(updatedEdges);
-  };
-
-  const handleLabelChange = (event) => {
-    setNodeName(event.target.value); 
-  };
-
-  const handleUpdateNodeName = () => {
-    if (selectedNode) {
-      const updatedNodes = nodes.map((node) => {
-        if (node.id === selectedNode.id) {
-          return {
-            ...node,
-            data: {
-              ...node.data,
-              label: selectedNode.label,
-            },
-          };
-        }
-        return node;
-      });
-      setNodes(updatedNodes);
-    }
-  };
+    setNodes(updatedNodes);
+  }, [nodes, selectedNodeLabel, setNodes]);
+  
   return (
     <div className={styles.appContainer}>
+      <NodeUpdateContext.Provider value={{ updateNode, updateNodeColor, updateNodeSize }}>
       <div className={styles.customReactflow} style={{ width: '210vh', height: '98vh' }}>
         <ReactFlow
           nodes={nodes}
@@ -146,16 +160,18 @@ export default function Nodes() {
           onNodeClick={onNodeClick}
           nodeTypes={nodeTypes} 
           edgeTypes={edgeTypes}
-          handleLabelChange={handleLabelChange}
-          handleUpdateNodeName={handleUpdateNodeName}
+          fitView
         >
+          
           <Controls className={styles.control} >
-          <NodeEditor 
-            node={selectedNode} 
-            onColorChange={updateNodeColor} 
-            onSizeChange={updateNodeSize} 
-            onApply={onApply}
-          />
+          {selectedNodeLabel && (
+  <NodeEditor 
+    node={{ data: { label: selectedNodeLabel } }}
+    onColorChange={updateNodeColor} 
+    onSizeChange={updateNodeSize} 
+    onApply={(color, size) => onApplyChanges(color, size, selectedNodeLabel)}
+  />
+)}
             <div className={styles.addButtonContainer}>
               <button className={styles.button} onClick={() => addNode(setNodes, nodes)}>Добавить узел</button>
             </div>
@@ -163,20 +179,24 @@ export default function Nodes() {
           <Background variant="dots" />        
         </ReactFlow>
       </div>
-      
       <ControlPanel />
-      {selectedNode && (
+      {selectedNodeLabel && (
         <div className={styles.nodeInfo}>
-          <p>{selectedNode.label}</p>
-          <p>{selectedNode.description}</p>
-          <Link to="/card" className={styles.maximal}>
-            <button className={styles.maximal} onClick={() => navigate('/')}>
-              <img src={maximisationIcon} className={styles.maximisationIcon} alt='Развернуть' />
-            </button>
-          </Link>  
-        </div>
+       <CardPage 
+          title={selectedNodeLabel}
+          description={nodes.find(node => node.data.label === selectedNodeLabel)?.data?.description}
+          onTitleChange={(newTitle) => updateNode(newTitle, nodes.find(node => node.data.label === selectedNodeLabel)?.data?.description)}
+          onDescriptionChange={(newDescription) => updateNode(selectedNodeLabel, newDescription)}
+        />
+            <Link  to="/card" className={styles.maximal} >
+              <button className={styles.maximal} onClick={() => navigate('/')}>
+                <img src={maximisationIcon} className={styles.maximisationIcon} alt='Развернуть' />
+              </button>
+            </Link> 
+        </div> 
       )}
+      </NodeUpdateContext.Provider>
     </div>
   );
-}
+      };
 export {Nodes};
