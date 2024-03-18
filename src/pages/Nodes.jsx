@@ -59,7 +59,7 @@ export default function Nodes() {
           <Controls className={styles.control} >
             <button className={styles.button} onClick={() => addNode(setNodes, nodes)}>Добавить узел</button>
           </Controls>
-          <Background variant="dots" />
+          <Background variant="dots" size="2" />
         </ReactFlow>
       </div>
       <ControlPanel />
