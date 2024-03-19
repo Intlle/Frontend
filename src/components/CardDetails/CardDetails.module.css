@@ -43,11 +43,27 @@
     background-color: #CDCDCD;
 }
 
+.box {
+    display: flex;
+    justify-content: space-around;
+    width: 98vw;
+}
+
+.hard {
+    background-color: #282F44;
+    color: #FFFFFF;
+    border: solid 4px #424D6C;
+    border-radius: 32px;
+    font-size: 1.75em;
+    font-weight: 700;
+    width: 26vw;
+}
+
 .card {
     color: #FFFFFF;
-    width: 22vw;
+    width: 23vw;
     height: 56vh;
-    padding: 0.5em 1.5em;
+    padding: 1vh 1.5vw;
     border: solid 4px #FFFFFF;
     border-radius: 32px;
     background-color: #8075FF;
@@ -65,13 +81,49 @@
     font-size: 1em;
 }
 
-.extra {
-    font-size: 1em;
+.twobtn {
     display: flex;
     flex-direction: column;
-    justify-content: space-evenly;
+    justify-content: space-between;
+    width: 26vw;
+}
+
+.good {
+    background-color: #282F44;
+    color: #FFFFFF;
+    border: solid 4px #8075FF;
+    border-radius: 32px;
+    height: 46%;
+    font-size: 1.75em;
+    font-weight: 700;
+}
+
+.something {
+    background-color: #282F44;
+    color: #FFFFFF;
+    border: solid 4px #ED217C;
+    border-radius: 32px;
+    height: 46%;
+    font-size: 1.75em;
+    font-weight: 700;
+}
+
+.hard:hover {
+    background-color: #1C2130;
+}
+
+.good:hover {
+    background-color: #1C2130;
+}
+
+.something:hover {
+    background-color: #1C2130;
+}
+
+.extra {
+    font-size: 1em;
     width: 80vw;
-    margin: 1.5vh 2vw;
+    margin: 2vh 2vw;
     padding: 2vh 8vw;
     border-radius: 26px;
     background-color: #1C2130;

@@ -55,6 +55,7 @@ export default function Nodes() {
           onEdgesChange={onEdgesChange}
           onConnect={onConnect}
           onNodeClick={onNodeClick}
+          proOptions={{hideAttribution: true}}
         >
           <Controls className={styles.control} >
             <button className={styles.button} onClick={() => addNode(setNodes, nodes)}>Добавить узел</button>
