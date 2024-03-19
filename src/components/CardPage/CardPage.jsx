@@ -1,32 +1,38 @@
 import React, { useState } from 'react';
 
-export default function CardPage({ title, description, onTitleChange }) {
-  const [cardTitle, setCardTitle] = useState(title);
-  const [cardDescription, setCardDescription] = useState(description);
+export default function CardPage({ title, description, onTitleChange, onDescriptionChange }) {
+  const [currentTitle, setCurrentTitle] = useState(title);
 
   const handleTitleChange = (e) => {
     const newTitle = e.target.value;
-    setCardTitle(newTitle);
+    setCurrentTitle(newTitle);
     onTitleChange(newTitle);
+    onDescriptionChange(description.replace(currentTitle, newTitle));
   };
 
   const handleDescriptionChange = (e) => {
-    setCardDescription(e.target.value);
+    const newDescription = e.target.value;
+    onDescriptionChange(newDescription);
   };
 
   return (
-    <div>
+    <div className='cardpage_text'>
       <input
+        className='cardpage_text1_input'
         type="text"
-        value={cardTitle}
+        value={currentTitle}
         onChange={handleTitleChange}
       />
       <textarea
-        value={cardDescription}
+        className='cardpage_text1_input'
+        value={description}
         onChange={handleDescriptionChange}
       />
     </div>
   );
 }
+
+
+
 
 

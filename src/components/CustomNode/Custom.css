@@ -1,9 +1,19 @@
 .custom_node1{
-  height: 50px;
   border: 1px solid #eee;
   padding: 5px;
+  padding-right: 12px;
+  padding-bottom: 10px;
   border-radius: 5px;
 
+}
+.cardpage_text{
+  flex-direction:column;
+  display: flex;
+}
+.cardpage_text1_input{
+  font-family: inherit;
+  font-weight: 500;
+  
 }
   
  

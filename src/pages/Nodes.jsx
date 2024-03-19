@@ -64,19 +64,19 @@ export default function Nodes() {
 
   const onNodeClick = (event, node) => {
     event.preventDefault();
-    setSelectedNodeLabel(node.data.label);
+    setSelectedNodeLabel(node.data.label); 
   };
 
   const onConnect = useCallback((params) => setEdges((eds) => addEdge(params, eds)), [setEdges]);
 
-  const updateNode = (newLabel, newDescription) => {
+  const updateNodeTitleAndDescription = (newTitle, newDescription) => {
     const updatedNodes = nodes.map((node) => {
       if (node.data.label === selectedNodeLabel) {
         return {
           ...node,
           data: {
             ...node.data,
-            label: newLabel,
+            label: newTitle,
             description: newDescription,
           },
         };
@@ -85,6 +85,10 @@ export default function Nodes() {
     });
     setNodes(updatedNodes);
   };
+  
+  
+  
+  
 
   const updateNodeColor = (color) => {
     if (selectedNodeLabel) {
@@ -149,7 +153,7 @@ export default function Nodes() {
   
   return (
     <div className={styles.appContainer}>
-      <NodeUpdateContext.Provider value={{ updateNode, updateNodeColor, updateNodeSize }}>
+      <NodeUpdateContext.Provider value={{ updateNodeTitleAndDescription, updateNodeColor, updateNodeSize }}>
       <div className={styles.customReactflow} style={{ width: '210vh', height: '98vh' }}>
         <ReactFlow
           nodes={nodes}
@@ -165,13 +169,13 @@ export default function Nodes() {
           
           <Controls className={styles.control} >
           {selectedNodeLabel && (
-  <NodeEditor 
-    node={{ data: { label: selectedNodeLabel } }}
-    onColorChange={updateNodeColor} 
-    onSizeChange={updateNodeSize} 
-    onApply={(color, size) => onApplyChanges(color, size, selectedNodeLabel)}
-  />
-)}
+          <NodeEditor 
+            node={{ data: { label: selectedNodeLabel } }}
+            onColorChange={updateNodeColor} 
+            onSizeChange={updateNodeSize} 
+            onApply={(color, size) => onApplyChanges(color, size, selectedNodeLabel)}
+           />
+           )}
             <div className={styles.addButtonContainer}>
               <button className={styles.button} onClick={() => addNode(setNodes, nodes)}>Добавить узел</button>
             </div>
@@ -183,11 +187,11 @@ export default function Nodes() {
       {selectedNodeLabel && (
         <div className={styles.nodeInfo}>
        <CardPage 
-          title={selectedNodeLabel}
-          description={nodes.find(node => node.data.label === selectedNodeLabel)?.data?.description}
-          onTitleChange={(newTitle) => updateNode(newTitle, nodes.find(node => node.data.label === selectedNodeLabel)?.data?.description)}
-          onDescriptionChange={(newDescription) => updateNode(selectedNodeLabel, newDescription)}
-        />
+        title={selectedNodeLabel}
+        description={nodes.find(node => node.data.label === selectedNodeLabel)?.data?.description}
+        onTitleChange={(newTitle) => updateNodeTitleAndDescription(newTitle, nodes.find(node => node.data.label === selectedNodeLabel)?.data?.description)}
+        onDescriptionChange={(newDescription) => updateNodeTitleAndDescription(selectedNodeLabel, newDescription)}
+       />
             <Link  to="/card" className={styles.maximal} >
               <button className={styles.maximal} onClick={() => navigate('/')}>
                 <img src={maximisationIcon} className={styles.maximisationIcon} alt='Развернуть' />
@@ -198,5 +202,5 @@ export default function Nodes() {
       </NodeUpdateContext.Provider>
     </div>
   );
-      };
+ };
 export {Nodes};
