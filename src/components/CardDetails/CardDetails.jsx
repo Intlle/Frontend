@@ -12,9 +12,11 @@ function CardDetails() {
                 <button className={styles.btn}>статистика</button>
                 <button className={styles.btn}>удалить карточку</button>
             </div>
-            <div className={styles.card}>
-                <h1 className={styles.title} >Кибернетика</h1>
-                <p className={styles.description}>Наука об управлении сложными системами с обратной связью. <br/><br/> Термин "Кибернетика" впервые появился в одном из сочинений Платона, заявлявшего о том, что всякое хорошее государство должно уметь управлять вообще, а не только разбираться в непосредственно</p>
+            <div className={styles.box}>
+                <div className={styles.card}>
+                    <h1 className={styles.title} >Кибернетика</h1>
+                    <p className={styles.description}>Наука об управлении сложными системами с обратной связью. <br/><br/> Термин "Кибернетика" впервые появился в одном из сочинений Платона, заявлявшего о том, что всякое хорошее государство должно уметь управлять вообще, а не только разбираться в непосредственно</p>
+                </div>
             </div>
             <div className={styles.extra}>
                 <p>Теги:</p>

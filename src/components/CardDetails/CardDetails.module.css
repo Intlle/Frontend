@@ -13,7 +13,7 @@
     display: flex;
     justify-content: center;
     align-content: center;
-    margin: 2vh 0;
+    margin: 1.5vh 0;
 }
 
 .minimize {
@@ -25,17 +25,17 @@
 }
 
 .minimizeIcon {
-    width: 4vmin;
+    width: 4.2vh;
 }
 
 .btn {
-    font-size: 18px;
+    font-size: 1em;
     font-weight: 700;
     color: #1C2130;
     background-color: #FFFFFF;
     border: none;
     border-radius: 18px;
-    padding: 1em 4em;
+    padding: 2vh 4vw;
     margin: 0 0.5vw;
 }
 
@@ -46,46 +46,32 @@
 .card {
     color: #FFFFFF;
     width: 22vw;
-    height: 54vh;
-    padding: 1em 1.5em;
+    height: 56vh;
+    padding: 0.5em 1.5em;
     border: solid 4px #FFFFFF;
-    border-radius: 50px;
+    border-radius: 32px;
     background-color: #8075FF;
-    margin: 0vmin;
+    margin: 0;
     overflow-y: auto;
-}
-
-.backCard {
-    position: absolute;
-    width: 30vw;
-    height: 54vh;
-    padding: 1em 1.5em;
-    background-color: #ED217C;
-    border-radius: 50px;
-    border: solid 4px #FFFFFF;
-    left: 0;
-    right: 0;
-    margin: 0 auto;
-    z-index: -1;
 }
 
 .title {
     text-align: center;
-    font-size: 30px;
+    font-size: 1.75em;
     margin: 0;
 }
 
 .description {
-    font-size: 18px;
+    font-size: 1em;
 }
 
 .extra {
-    font-size: 18px;
+    font-size: 1em;
     display: flex;
     flex-direction: column;
     justify-content: space-evenly;
     width: 80vw;
-    margin: 2vh 2vw;
+    margin: 1.5vh 2vw;
     padding: 2vh 8vw;
     border-radius: 26px;
     background-color: #1C2130;
@@ -93,6 +79,6 @@
 }
 
 .extra p {
-    padding: 0.7em 0;
+    padding: 0.5em 0;
     margin: 0;
 }

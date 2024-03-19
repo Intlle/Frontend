@@ -47,7 +47,7 @@ export default function Nodes() {
 
   return (
     <div className={styles.appContainer}>
-      <div className={styles.customReactflow} style={{ width: '196vh', height: '96vh' }}>
+      <div className={styles.customReactflow} >
         <ReactFlow
           nodes={nodes}
           edges={edges}
