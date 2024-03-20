@@ -6,33 +6,32 @@ function CardDetails() {
     const navigate = useNavigate();
     return (
         <div className={styles.window}>
-            <h1 className={styles.title} >Кибернетика</h1>
-            <div className={styles.description}>
-                <p>Наука об управлении сложными системами с обратной связью. <br/><br/> Термин "Кибернетика" впервые появился в одном из сочинений Платона, заявлявшего о том, что всякое хорошее государство должно уметь управлять вообще, а не только разбираться в непосредственно</p>
-            </div>
-            <div className={styles.groupBox}>
-                <div className={styles.pGroup}>
-                    <p>Теги:</p>
-                    <hr />
-                    <p>Предварительные понятия:</p>
-                    <hr />
-                    <p>Нужно для:</p>
-                </div>
-                <div className={styles.btnGroup}>
-                    <button>отметить как изученное</button>
-                    <hr />
-                    <button>сбросить прогреcc изучения</button>
-                    <hr />
-                    <button>выделить сеть понятия</button>
-                </div>
-            </div>
             <div className={styles.btnLine}>
+                <button className={styles.minimize} onClick={() => navigate('/')}><img src={minimizeIcon} className={styles.minimizeIcon} alt='Свернуть' /></button>
                 <button className={styles.btn}>начать занятие</button>
                 <button className={styles.btn}>статистика</button>
                 <button className={styles.btn}>удалить карточку</button>
-                <button className={styles.minimize} onClick={() => navigate('/')}><img src={minimizeIcon} className={styles.minimizeIcon} alt='Свернуть' /></button>
             </div>
-        </div>
+            <div className={styles.box}>
+                <button className={styles.hard}>Тяжело-о-о...</button>
+                <div className={styles.card}>
+                    <div className={styles.text}>
+                        <h1 className={styles.title} >Кибернетика</h1>
+                        <p className={styles.description}>Наука об управлении сложными системами с обратной связью. <br/><br/> Термин "Кибернетика" впервые появился в одном из сочинений Платона, заявлявшего о том, что всякое хорошее государство должно уметь управлять вообще, а не только разбираться в непосредственно</p>
+                    </div>
+                    <button className={styles.turn}>-----------</button>
+                </div>
+                <div className={styles.twobtn}>
+                    <button className={styles.good}>Получилось вспомнить</button>
+                    <button className={styles.something}>Что-то припоминается</button>
+                </div>
+            </div>
+            <div className={styles.extra}>
+                <p>Теги:</p>
+                <p>Предварительные понятия:</p>
+                <p>Нужно для:</p>
+                </div>
+            </div>
     );
   }
 export default CardDetails;

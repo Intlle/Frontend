@@ -47,7 +47,7 @@ export default function Nodes() {
 
   return (
     <div className={styles.appContainer}>
-      <div className={styles.customReactflow} style={{ width: '196vh', height: '96vh' }}>
+      <div className={styles.customReactflow} >
         <ReactFlow
           nodes={nodes}
           edges={edges}
@@ -55,11 +55,12 @@ export default function Nodes() {
           onEdgesChange={onEdgesChange}
           onConnect={onConnect}
           onNodeClick={onNodeClick}
+          proOptions={{hideAttribution: true}}
         >
           <Controls className={styles.control} >
             <button className={styles.button} onClick={() => addNode(setNodes, nodes)}>Добавить узел</button>
           </Controls>
-          <Background variant="dots" />
+          <Background variant="dots" size="2" />
         </ReactFlow>
       </div>
       <ControlPanel />
