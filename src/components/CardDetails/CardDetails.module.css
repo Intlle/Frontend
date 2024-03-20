@@ -5,15 +5,15 @@
     flex-direction: column;
     align-items: center;
     justify-content: space-between;
-    font-weight: 700;
-    letter-spacing: 0.1em;
+    font-weight: 650;
+    letter-spacing: 0.04em;
 }
 
 .btnLine {
     display: flex;
     justify-content: center;
     align-content: center;
-    margin: 1.5vh 0;
+    margin: 2vh 0 4vh 0;
 }
 
 .minimize {
@@ -22,6 +22,10 @@
     border: none;
     margin: auto 1vmin;
     font-size: 0;
+}
+
+.minimize:hover {
+    background-color: #1C2130;
 }
 
 .minimizeIcon {
@@ -34,8 +38,9 @@
     color: #1C2130;
     background-color: #FFFFFF;
     border: none;
-    border-radius: 18px;
-    padding: 2vh 4vw;
+    border-radius: 16px;
+    width: 16vw;
+    padding: 1.9vh 0;
     margin: 0 0.5vw;
 }
 
@@ -54,15 +59,18 @@
     color: #FFFFFF;
     border: solid 4px #424D6C;
     border-radius: 32px;
-    font-size: 1.75em;
+    font-size: 1.5em;
     font-weight: 700;
-    width: 26vw;
+    width: 46vh;
 }
 
 .card {
     color: #FFFFFF;
-    width: 23vw;
-    height: 56vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    width: 40vh;
+    height: 51vh;
     padding: 1vh 1.5vw;
     border: solid 4px #FFFFFF;
     border-radius: 32px;
@@ -73,7 +81,7 @@
 
 .title {
     text-align: center;
-    font-size: 1.75em;
+    font-size: 1.5em;
     margin: 0;
 }
 
@@ -81,11 +89,18 @@
     font-size: 1em;
 }
 
+.turn {
+    background-color: rgba(255, 255, 255, 0);
+    border: none;
+    font-size: 2em;
+    color: white;
+}
+
 .twobtn {
     display: flex;
     flex-direction: column;
     justify-content: space-between;
-    width: 26vw;
+    width: 46vh;
 }
 
 .good {
@@ -94,7 +109,7 @@
     border: solid 4px #8075FF;
     border-radius: 32px;
     height: 46%;
-    font-size: 1.75em;
+    font-size: 1.5em;
     font-weight: 700;
 }
 
@@ -104,7 +119,7 @@
     border: solid 4px #ED217C;
     border-radius: 32px;
     height: 46%;
-    font-size: 1.75em;
+    font-size: 1.5em;
     font-weight: 700;
 }
 
@@ -121,16 +136,15 @@
 }
 
 .extra {
-    font-size: 1em;
     width: 80vw;
-    margin: 2vh 2vw;
+    margin-bottom: 2vw;
     padding: 2vh 8vw;
-    border-radius: 26px;
+    border-radius: 22px;
     background-color: #1C2130;
     color: #FFFFFF;
 }
 
 .extra p {
-    padding: 0.5em 0;
+    padding: 0.6em 0;
     margin: 0;
 }
