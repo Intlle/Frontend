@@ -71,12 +71,28 @@
     justify-content: space-between;
     width: 40vh;
     height: 51vh;
-    padding: 1vh 1.5vw;
+    padding: 1vh 0;
     border: solid 4px #FFFFFF;
     border-radius: 32px;
     background-color: #8075FF;
     margin: 0;
+}
+
+.text {
     overflow-y: auto;
+}
+
+.text::-webkit-scrollbar {
+    width: 6px;
+}
+.text::-webkit-scrollbar-thumb { 
+    background: #fff;
+    border-radius: 10px 0 0 10px;
+}
+.text::-webkit-scrollbar-track {
+    background: #ffffff90;
+    margin: 4vh 0;
+    border-radius: 10px 0 0 10px;
 }
 
 .title {
@@ -87,6 +103,7 @@
 
 .description {
     font-size: 1em;
+    padding: 0 1.5vw;
 }
 
 .turn {

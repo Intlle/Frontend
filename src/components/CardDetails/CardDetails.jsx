@@ -15,7 +15,7 @@ function CardDetails() {
             <div className={styles.box}>
                 <button className={styles.hard}>Тяжело-о-о...</button>
                 <div className={styles.card}>
-                    <div>
+                    <div className={styles.text}>
                         <h1 className={styles.title} >Кибернетика</h1>
                         <p className={styles.description}>Наука об управлении сложными системами с обратной связью. <br/><br/> Термин "Кибернетика" впервые появился в одном из сочинений Платона, заявлявшего о том, что всякое хорошее государство должно уметь управлять вообще, а не только разбираться в непосредственно</p>
                     </div>
