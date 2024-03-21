@@ -7,6 +7,7 @@ import ReactFlow, {
   useEdgesState,
   addEdge,
 } from 'reactflow';
+
 import maximisationIcon from '../assets/expand_icon.svg';
 import CustomNode from '../components/CustomNode/CustomNode.jsx'
 import CustomEdge from '../components/CustomEdge/CustomEdge.jsx'
@@ -20,7 +21,7 @@ import CardPage from '../components/CardPage/CardPage.jsx';
 
 
 const initialNodes = [
-  { id: '1', type: 'customNode' ,position: { x: 650, y: 350 }, data:  { label: 'Node 1', description: 'Some description for Node 1' }},
+  { id: '1', type: 'customNode' ,position: { x: 650, y: 350 }, data:  { label: 'Узел 1', description: 'Описание узла 1' }},
 ]; 
 const initialEdges = [{ id: 'e1-2' }];
 
@@ -37,7 +38,7 @@ const addNode = (setNodes, nodes) => {
       id: nextId.toString(),
       type: 'customNode', 
       position: getPosition(),
-      data: { label: `Node ${nextId}`, description: `Some description for Node ${nextId}` },
+      data: { label: `Узел ${nextId}`, description: `Описание узла ${nextId}` },
     },
   ]);
 };
@@ -54,8 +55,9 @@ const edgeTypes = {
 export const NodeUpdateContext = React.createContext({
   updateNode: () => {},
   updateNodeColor: () => {},
-  updateNodeSize: () => {}
+  updateNodeSize: () => {},
 });
+
 export default function Nodes() {
   const [nodes, setNodes, onNodesChange] = useNodesState(initialNodes);
   const [edges, setEdges, onEdgesChange] = useEdgesState(initialEdges);
@@ -87,9 +89,6 @@ export default function Nodes() {
   };
   
   
-  
-  
-
   const updateNodeColor = (color) => {
     if (selectedNodeLabel) {
       const updatedNodes = nodes.map((node) => {
@@ -133,6 +132,10 @@ export default function Nodes() {
     updateNodeSize(size);
    
   };
+  const handleDeleteNode = () => {
+    setNodes((prevNodes) => prevNodes.filter((node) => node.data.label !== selectedNodeLabel));
+    setSelectedNodeLabel('');
+  };
 
   const onChange = useCallback((newLabel) => {
     const updatedNodes = nodes.map((node) => {
@@ -154,7 +157,19 @@ export default function Nodes() {
   return (
     <div className={styles.appContainer}>
       <NodeUpdateContext.Provider value={{ updateNodeTitleAndDescription, updateNodeColor, updateNodeSize }}>
-      <div className={styles.customReactflow} style={{ width: '210vh', height: '98vh' }}>
+      <div className={styles.customReactflow} style={{ width: '210vh', height: '100vh' }}>
+      <div className={styles.nodeEditorStyles}>
+
+              <NodeEditor 
+                node={{ data: { label: selectedNodeLabel } }}
+                onColorChange={updateNodeColor} 
+                onSizeChange={updateNodeSize} 
+                onApply={(color, size) => onApplyChanges(color, size, selectedNodeLabel)}
+                onDeleteNode={handleDeleteNode}
+                onAddNode={() => addNode(setNodes, nodes)}
+              />
+            
+          </div>
         <ReactFlow
           nodes={nodes}
           edges={edges}
@@ -167,30 +182,19 @@ export default function Nodes() {
           fitView
         >
           
-          <Controls className={styles.control} >
-          {selectedNodeLabel && (
-          <NodeEditor 
-            node={{ data: { label: selectedNodeLabel } }}
-            onColorChange={updateNodeColor} 
-            onSizeChange={updateNodeSize} 
-            onApply={(color, size) => onApplyChanges(color, size, selectedNodeLabel)}
-           />
-           )}
-            <div className={styles.addButtonContainer}>
-              <button className={styles.button} onClick={() => addNode(setNodes, nodes)}>Добавить узел</button>
-            </div>
-          </Controls>
-          <Background variant="dots" />        
+          <Controls className={styles.control} showZoom={true} showInteractive={false} showPan={false} showFitView={false}/>
+           <Background variant="dots" gap={15} style={{boxShadow: 'inset 0px 0px 100px 100px #161a26fd'}} />
         </ReactFlow>
       </div>
       <ControlPanel />
       {selectedNodeLabel && (
-        <div className={styles.nodeInfo}>
+        <div className={styles.CardPageBlock }>
        <CardPage 
         title={selectedNodeLabel}
         description={nodes.find(node => node.data.label === selectedNodeLabel)?.data?.description}
         onTitleChange={(newTitle) => updateNodeTitleAndDescription(newTitle, nodes.find(node => node.data.label === selectedNodeLabel)?.data?.description)}
         onDescriptionChange={(newDescription) => updateNodeTitleAndDescription(selectedNodeLabel, newDescription)}
+        onAddNode={() => addNode(setNodes, nodes)}
        />
             <Link  to="/card" className={styles.maximal} >
               <button className={styles.maximal} onClick={() => navigate('/')}>
@@ -204,3 +208,4 @@ export default function Nodes() {
   );
  };
 export {Nodes};
+

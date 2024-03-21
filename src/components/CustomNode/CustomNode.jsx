@@ -2,11 +2,10 @@ import { useContext, useCallback, useState } from 'react';
 import { Handle, Position } from 'reactflow';
 import { NodeUpdateContext } from '../../pages/Nodes.jsx';
 
-function CustomNode({ data, isConnectable, onTitleChange }) {
+function CustomNode({ data, isConnectable, onTitleChange}) {
   const { updateNodeTitleAndDescription } = useContext(NodeUpdateContext); 
 
   const [label, setLabel] = useState(data.label);
-
   const onInputChange = useCallback((evt) => {
     const newLabel = evt.target.value;
     setLabel(newLabel);
@@ -15,39 +14,44 @@ function CustomNode({ data, isConnectable, onTitleChange }) {
   }, [updateNodeTitleAndDescription, data.description, onTitleChange]);
 
   const nodeStyle = {
-    width: `${data.size}px`, 
-    height:`${data.size * 0.5}px`,
+    width: `${data.size*0.5}vh`, 
+    height:`${data.size*0.2}vh`,
     backgroundColor: data.color,
+    border: '3px solid white',
+    display: 'flex',
+    alignItems: 'center',
+    justifyContent: 'center',
+    textAlign: 'center',
+    fontSize: `${data.size*0.1}vh`,
+   
   };
-  
-  const inputContainerStyle = {
-    width: `${data.size}px`,
-    height: `${data.size * 0.3}px`,
-    fontSize: `${data.size * 0.2}px`,
-  };
+
   
   return (
-    <div className="custom_node1" style={nodeStyle}>
-      <Handle
-       type="target"
-        position={Position.Top} 
-        isConnectable={isConnectable} 
-        style={{ borderRadius: '50%', width: '10px', height: '10px', background: 'blue' }} />
+    <div >
+         <Handle
+        type="target"
+        position={Position.Bottom}
+        id="a"
+        isConnectable={isConnectable}
+        style={{ borderRadius: '50%', width: '10px', height: '10px', background: 'white' }}
+      />
       <div>
         <input
+          className="custom_node1"
           id="text"
           name="text"
           value={label}
           onChange={onInputChange}
-          style={inputContainerStyle}
+          style={nodeStyle}
         />
       </div>
       <Handle
-        type="source"
+        type="sourse"
         position={Position.Bottom}
         id="a"
         isConnectable={isConnectable}
-        style={{ borderRadius: '50%', width: '10px', height: '10px', background: 'blue' }}
+        style={{ borderRadius: '50%', width: '10px', height: '10px', background: 'white' }}
       />
     </div>
   );

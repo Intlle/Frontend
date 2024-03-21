@@ -1,32 +1,59 @@
-import React, { useState } from 'react';
-const NodeEditor = ({ node, onColorChange, onSizeChange, onApply }) => {
-  const [color, setColor] = useState(node?.data?.color || '#FFFFFF');
-  const [size, setSize] = useState(node?.data?.size || '');
-  const handleColorChange = (e) => {
-    setColor(e.target.value);
-    onColorChange(e.target.value);
-    console.log('New color:', e.target.value);
+import React from 'react';
+
+const NodeEditor = ({onColorChange, onSizeChange, onDeleteNode,onAddNode }) => {
+  const handleColorChange = (color) => {
+    onColorChange(color);
+    console.log('New color:', color);
   };
-  const handleSizeChange = (e) => {
-    setSize(parseInt(e.target.value));
-    onSizeChange(parseInt(e.target.value));
-    console.log('New size:', parseInt(e.target.value));
-  };
-  const handleApply = () => {
-    console.log("Applying changes:", color, size);
-    onApply(color, size, node.data.label);
+
+  const handleSizeChange = (size) => {
+    onSizeChange(size);
+    console.log('New size:', size);
   };
 
   return (
-    <div >
-      <label style={{ color: 'white', fontFamily: 'inherit', fontWeight: '500' }}>Цвет:
-        <input type="color" value={color} onChange={handleColorChange} />
-      </label>
-      <label style={{ color: 'white', fontFamily: 'inherit', fontWeight: '500' }}>Размер:
-        <input type="number" value={size} onChange={handleSizeChange} />
-      </label>
+    <div style={{ color: 'white', fontFamily: 'inherit', fontWeight: '500' }}>
       <div>
-        <button onClick={handleApply}>Применить</button>
+        <label>Цвет:</label>
+        <div style={{ display: 'flex', marginTop: '5px' }}>
+          {['#ED217C', '#8075FF', '#c51d34', '#CDCDCD', '#1C2130'].map((color) => (
+            <button
+              key={color}
+              style={{ backgroundColor: color, width: '30px', height: '30px', borderRadius: '50%', marginRight: '5px', border: '2px solid white', cursor: 'pointer' }}
+              onClick={() => handleColorChange(color)}
+            />
+          ))}
+        </div>
+      </div>
+      <div style={{ marginTop: '10px' }}>
+        <label>Размер:</label>
+        <div style={{ display: 'flex', marginTop: '5px', alignItems: 'center' }}>
+          {[20, 30, 40].map((size) => (
+            <button
+              key={size}
+              style={{ backgroundColor: 'white', width: `${size}px`, height: `${size}px`, borderRadius: '50%', marginRight: '5px', border: 'none', cursor: 'pointer' }}
+              onClick={() => handleSizeChange(size)}
+            />
+          ))}
+        </div>
+      </div>
+      <div  className='button-container' style={{ marginTop: '10px', display: 'flex', justifyContent: 'space-between' }}>
+        <button
+          style={{margin:'1px',marginTop: '10px',fontWeight: '500',fontFamily:'inherit', backgroundColor: 'White', color: 'black', border: 'none', padding: '10px', borderRadius: '5px', cursor: 'pointer' }}
+          onClick={onDeleteNode}
+          onMouseEnter={(e) => { e.target.style.backgroundColor = '#CDCDCD'; }}
+          onMouseLeave={(e) => { e.target.style.backgroundColor = 'White'; }}
+        >
+          Удалить узел
+        </button>
+        <button
+          style={{ marginTop: '10px',fontWeight: '500',fontFamily:'inherit', backgroundColor: 'White', color: 'black', border: 'none', padding: '10px', borderRadius: '5px', cursor: 'pointer' }}
+          onClick={onAddNode}
+          onMouseEnter={(e) => { e.target.style.backgroundColor = '#CDCDCD'; }}
+          onMouseLeave={(e) => { e.target.style.backgroundColor = 'White'; }}
+        >
+          Добавить узел
+        </button>
       </div>
     </div>
   );

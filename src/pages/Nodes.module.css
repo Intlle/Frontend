@@ -1,51 +1,63 @@
 .appContainer {
-  margin: 0;
   display: flex;
-  place-items: center;
-  min-width: 320px;
-  height: 100vh;
   position: relative;
+  width: 100vw; 
+  height: 100vh;
+  overflow: hidden;
+  padding: 0;
+  margin: 0;
 }
-
 .customReactflow {
   width: 100%;
-  height: 98vh;
-  background-color:#0b122f;
-  padding: 1vh;
+  height: 100vh;
+  background-color:#282f44;
+  margin: 0;
+  padding: 0;
 }
 
-.control {
-  background-color: #0b122f;
-  border-radius: 2%;
-  border:2px solid #ffffff;
+.nodeEditorStyles {
+  position: absolute;
+  top: 20px; 
+  left: 20px;
+  width: 200px; 
+  background-color: #282f44; 
+  border-radius: 10px; 
+  padding: 10px; 
+  z-index: 1000;
+  border: 2px solid white;
+ 
+}
+.control{
+  border-radius: 50%;
+}
+.control button[data-ggb-name="onZoomIn"],
+.control button[data-ggb-name="onZoomOut"] {
+  color: #ffffff;
+  
+}
+.control button:nth-child(1) {
+  border-top-left-radius: 50%;
+  border-top-right-radius: 50%;
+  
 }
 
-.button {
-  border: 1px solid transparent;
-  padding: 0.6em 1.2em;
-  font-size: 1em;
-  font-weight: 500;
-  font-family: inherit;
-  background-color: #ffffff;
-  cursor: pointer;
+.control button:nth-child(2) {
+  border-bottom-left-radius: 50%;
+  border-bottom-right-radius: 50%;
+ 
+}
+.control button:hover {
+  background-color: #CDCDCD;
 }
 
-.button:hover {
-  background-color:#fdfdfdea;
-}
-
-.button:focus,
-.button:focus-visible {
-  outline: 4px auto -webkit-focus-ring-color;
-}
 .maximal{
-  background-color: #0b122f;
+  background-color: #282F44;
   padding: 0;
   border: none;
   font-size: 0;
   position: absolute;
-  bottom: 10px; 
-  right: 10px; 
+  bottom: 21px; 
+  right: 18px; 
   border-radius: 7px;
   text-decoration: none;
   font-family: inherit;
@@ -53,43 +65,24 @@
   cursor: pointer; 
 }
 .maximisationIcon{
-  width: 5vmin;
+  width: 4vmin;
   padding: 1px;
 }
 .nodeInfo {
   position: absolute;
   bottom: 30px;
   right: 20px;
-  background-color: #ffffff;
+  background-color: #282f44;
   border: 1px solid #e1e1e1;
   border-radius: 8px;
   padding: 16px;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
   max-width: 300px; 
   padding-bottom: 70px;
+  
 }
 
-.nodeInfo p {
-  margin: 0;
-  font-size: 14px;
-  line-height: 1.4;
-  font-family: inherit;
-  font-weight: 500;
-  padding-bottom: 4px;
-}
 
-.nodeInfo a {
-  display: block;
-  margin-top: 8px;
-  text-decoration: none;
-  color: #000000;
-  font-weight: 500;
-  font-family: inherit;
-  font-size: 14px;
-}
 
-.nodeInfo a:hover {
-  text-decoration: underline;
-}
 
 

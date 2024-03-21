@@ -1,26 +1,4 @@
-.controlPanel {
-    position: absolute;
-    top: 20px;
-    right: 20px;
-    display: flex;
-    flex-direction:column;
-    background-color: #fcfcfcee;
-    border-radius: 10%;
-    width: 200px;
-}
 
-.controlPanel button {
-    font-size: 15px;
-    font-weight: 500;
-    font-family: inherit;
-    size: 10px;
-    border: none;
-    padding: 10px;
-    color: #000000;
-    cursor: pointer;
-    border-radius: 20px;
-}
-
-.controlPanel button:hover {
-    background-color: #ffffffb1;
-}
+.button:hover {
+    background-color: #ffffffa5;
+  }

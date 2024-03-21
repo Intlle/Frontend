@@ -15,7 +15,7 @@ const downloadFile = (content, fileName) => {
   document.body.removeChild(link);
 };
 
-const handleButtonClick = (action) => {
+const handleButtonClick = (action, nodes, edges) => {
   switch (action) {
     case 'new-schema':
       window.open('http://localhost:5173');
@@ -33,16 +33,56 @@ const handleButtonClick = (action) => {
       break;
   }
 };
+const controlPanel = {
+position: 'absolute',
+top: '20px',
+right: '20px',
+display: 'flex',
+flexDirection:'column',
+width: '200px',
+borderRadius: '20px',
+backgroundColor: '#fcfcfc',
+};
+const buttonRadius1 ={
+  borderTopLeftRadius: '20px',
+  borderTopRightRadius: '20px',
+  fontSize: '15px',
+  fontWeight: '500',
+  fontFamily: 'inherit',
+  border: 'none',
+  color: '#000000',
+  cursor: 'pointer',
+  padding: '5px',
+};
+const buttonRadius2 ={
+  borderBottomLeftRadius: '20px',
+  borderBottomRightRadius: '20px',
+  fontSize: '15px',
+  fontWeight: '500',
+  fontFamily: 'inherit',
+  border: 'none',
+  color: '#000000',
+  cursor: 'pointer',
+  padding: '5px',
+};
+const buttonControlPanel= {
+  fontSize: '15px',
+  fontWeight: '500',
+  fontFamily: 'inherit',
+  border: 'none',
+  color: '#000000',
+  cursor: 'pointer',
+  padding: '5px',
+};
 
 function ControlPanel({ nodes, edges }) {
   return (
-    <div className={styles.controlPanel}>
-      <button onClick={() => handleButtonClick('new-schema')}>Новая схема</button>
-      <button onClick={() => handleButtonClick('open-file')}>Открыть файл</button>
-      <button onClick={() => handleButtonClick('save-locally')}>Сохранить локально</button>
-      <button onClick={() => handleButtonClick('save-server')}>Сохранить на сервере</button>
-      <button onClick={() => handleButtonClick('settings')}>Настройки</button>
-      <button onClick={() => handleButtonClick('info')}>Информация</button>
+    <div style={controlPanel}>
+      <button style={buttonRadius1} className={styles.button} onClick={() => handleButtonClick('new-schema')}>Новая схема</button>
+      <button style={buttonControlPanel} className={styles.button} onClick={() => handleButtonClick('open-file')}>Открыть файл</button>
+      <button style={buttonControlPanel} className={styles.button} onClick={() => handleButtonClick('save-locally')}>Сохранить локально</button>
+      <button style={buttonControlPanel} className={styles.button} onClick={() => handleButtonClick('save-locally', nodes, edges)}>Сохранить локально</button>
+      <button style={buttonRadius2} className={styles.button} onClick={() => handleButtonClick('settings')}>Настройки</button>
     </div>
   );
 }
