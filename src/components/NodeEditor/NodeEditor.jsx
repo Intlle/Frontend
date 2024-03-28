@@ -1,11 +1,14 @@
 import React from 'react';
 
+
 const NodeEditor = ({onColorChange, onSizeChange, onDeleteNode,onAddNode }) => {
+
+
   const handleColorChange = (color) => {
     onColorChange(color);
     console.log('New color:', color);
   };
-
+  
   const handleSizeChange = (size) => {
     onSizeChange(size);
     console.log('New size:', size);
@@ -39,7 +42,7 @@ const NodeEditor = ({onColorChange, onSizeChange, onDeleteNode,onAddNode }) => {
       </div>
       <div  className='button-container' style={{ marginTop: '10px', display: 'flex', justifyContent: 'space-between' }}>
         <button
-          style={{margin:'1px',marginTop: '10px',fontWeight: '500',fontFamily:'inherit', backgroundColor: 'White', color: 'black', border: 'none', padding: '10px', borderRadius: '5px', cursor: 'pointer' }}
+          style={{fontWeight: '500',fontFamily:'inherit', backgroundColor: 'White', color: 'black', border: '1px solid black', padding: '10px', borderRadius: '5px', cursor: 'pointer' }}
           onClick={onDeleteNode}
           onMouseEnter={(e) => { e.target.style.backgroundColor = '#CDCDCD'; }}
           onMouseLeave={(e) => { e.target.style.backgroundColor = 'White'; }}
@@ -47,7 +50,7 @@ const NodeEditor = ({onColorChange, onSizeChange, onDeleteNode,onAddNode }) => {
           Удалить узел
         </button>
         <button
-          style={{ marginTop: '10px',fontWeight: '500',fontFamily:'inherit', backgroundColor: 'White', color: 'black', border: 'none', padding: '10px', borderRadius: '5px', cursor: 'pointer' }}
+          style={{ fontWeight: '500',fontFamily:'inherit', backgroundColor: 'White', color: 'black', border: '1px solid black', padding: '10px', borderRadius: '5px', cursor: 'pointer' }}
           onClick={onAddNode}
           onMouseEnter={(e) => { e.target.style.backgroundColor = '#CDCDCD'; }}
           onMouseLeave={(e) => { e.target.style.backgroundColor = 'White'; }}

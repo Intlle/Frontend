@@ -21,7 +21,7 @@ import CardPage from '../components/CardPage/CardPage.jsx';
 
 
 const initialNodes = [
-  { id: '1', type: 'customNode' ,position: { x: 650, y: 350 }, data:  { label: 'Узел 1', description: 'Описание узла 1' }},
+  { id: '1', type: 'customNode' ,position: { x: 650, y: 350 }, data:  { label: 'Узел 1', description: 'Описание узла 1', color:'#1C2130' }},
 ]; 
 const initialEdges = [{ id: 'e1-2' }];
 
@@ -32,13 +32,14 @@ const getPosition = () => ({
 
 const addNode = (setNodes, nodes) => {
   const nextId = nodes.length > 0 ? parseInt(nodes[nodes.length - 1].id) + 1 : 1;
+  const prevColor = nodes.length > 0 ? nodes[nodes.length - 1].data.color : '#1C2130';
   setNodes((prev) => [
     ...prev,
     {
       id: nextId.toString(),
       type: 'customNode', 
       position: getPosition(),
-      data: { label: `Узел ${nextId}`, description: `Описание узла ${nextId}` },
+      data: { label: `Узел ${nextId}`, description: `Описание узла ${nextId}`, color: prevColor },
     },
   ]);
 };
@@ -56,6 +57,7 @@ export const NodeUpdateContext = React.createContext({
   updateNode: () => {},
   updateNodeColor: () => {},
   updateNodeSize: () => {},
+  updateNodeTitle: () => {},
 });
 
 export default function Nodes() {
@@ -64,11 +66,17 @@ export default function Nodes() {
   const [selectedNodeLabel, setSelectedNodeLabel] = useState('');
   const navigate = useNavigate();
 
+  
+  
   const onNodeClick = (event, node) => {
     event.preventDefault();
     setSelectedNodeLabel(node.data.label); 
   };
-
+  const handleNodeSelection = (node) => {
+    setSelectedNodeLabel(node.data.label);
+    setNodeDescription(node.data.description);
+    setCardPageTitle(node.data.label); 
+  }
   const onConnect = useCallback((params) => setEdges((eds) => addEdge(params, eds)), [setEdges]);
 
   const updateNodeTitleAndDescription = (newTitle, newDescription) => {
@@ -156,7 +164,7 @@ export default function Nodes() {
   
   return (
     <div className={styles.appContainer}>
-      <NodeUpdateContext.Provider value={{ updateNodeTitleAndDescription, updateNodeColor, updateNodeSize }}>
+      <NodeUpdateContext.Provider value={{ updateNodeTitleAndDescription, updateNodeColor, updateNodeSize}}>
       <div className={styles.customReactflow} style={{ width: '210vh', height: '100vh' }}>
       <div className={styles.nodeEditorStyles}>
 
@@ -183,19 +191,39 @@ export default function Nodes() {
         >
           
           <Controls className={styles.control} showZoom={true} showInteractive={false} showPan={false} showFitView={false}/>
-           <Background variant="dots" gap={15} style={{boxShadow: 'inset 0px 0px 100px 100px #161a26fd'}} />
+           <Background variant="dots" gap={15} />
         </ReactFlow>
       </div>
       <ControlPanel />
       {selectedNodeLabel && (
         <div className={styles.CardPageBlock }>
-       <CardPage 
-        title={selectedNodeLabel}
-        description={nodes.find(node => node.data.label === selectedNodeLabel)?.data?.description}
-        onTitleChange={(newTitle) => updateNodeTitleAndDescription(newTitle, nodes.find(node => node.data.label === selectedNodeLabel)?.data?.description)}
-        onDescriptionChange={(newDescription) => updateNodeTitleAndDescription(selectedNodeLabel, newDescription)}
-        onAddNode={() => addNode(setNodes, nodes)}
-       />
+              <CardPage 
+            title={selectedNodeLabel}
+            description={nodes.find(node => node.data.label === selectedNodeLabel)?.data?.description}
+            onTitleChange={(newTitle) => {
+              updateNodeTitleAndDescription(newTitle, nodes.find(node => node.data.label === selectedNodeLabel)?.data?.description);
+            }}
+            onDescriptionChange={(newDescription) => updateNodeTitleAndDescription(selectedNodeLabel, newDescription)}
+            onAddNode={() => addNode(setNodes, nodes)}
+            handleNodeSelection={handleNodeSelection}
+            setCardPageTitle={setSelectedNodeLabel}
+            onNodeLabelChange={(newLabel) => {
+              const updatedNodes = nodes.map((node) => {
+                if (node.data.label === selectedNodeLabel) {
+                  return {
+                    ...node,
+                    data: {
+                      ...node.data,
+                      label: newLabel,
+                    },
+                  };
+                }
+                return node;
+              });
+              setNodes(updatedNodes);
+            }}
+          />
+
             <Link  to="/card" className={styles.maximal} >
               <button className={styles.maximal} onClick={() => navigate('/')}>
                 <img src={maximisationIcon} className={styles.maximisationIcon} alt='Развернуть' />

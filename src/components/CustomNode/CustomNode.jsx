@@ -1,17 +1,16 @@
-import { useContext, useCallback, useState } from 'react';
+import { useContext, useCallback, useState, useEffect } from 'react';
 import { Handle, Position } from 'reactflow';
 import { NodeUpdateContext } from '../../pages/Nodes.jsx';
 
-function CustomNode({ data, isConnectable, onTitleChange}) {
-  const { updateNodeTitleAndDescription } = useContext(NodeUpdateContext); 
+function CustomNode({ data, isConnectable}) {
+  const { updateNodeTitleAndDescription} = useContext(NodeUpdateContext); 
 
   const [label, setLabel] = useState(data.label);
   const onInputChange = useCallback((evt) => {
     const newLabel = evt.target.value;
     setLabel(newLabel);
     updateNodeTitleAndDescription(newLabel, data.description);
-    onTitleChange(newLabel); 
-  }, [updateNodeTitleAndDescription, data.description, onTitleChange]);
+  }, [updateNodeTitleAndDescription, data.description]);
 
   const nodeStyle = {
     width: `${data.size*0.5}vh`, 
@@ -23,24 +22,20 @@ function CustomNode({ data, isConnectable, onTitleChange}) {
     justifyContent: 'center',
     textAlign: 'center',
     fontSize: `${data.size*0.1}vh`,
-   
   };
-
   
   return (
     <div >
          <Handle
         type="target"
         position={Position.Bottom}
-        id="a"
+        id={`input-${data.id}`}
         isConnectable={isConnectable}
         style={{ borderRadius: '50%', width: '10px', height: '10px', background: 'white' }}
       />
       <div>
         <input
           className="custom_node1"
-          id="text"
-          name="text"
           value={label}
           onChange={onInputChange}
           style={nodeStyle}
@@ -49,7 +44,7 @@ function CustomNode({ data, isConnectable, onTitleChange}) {
       <Handle
         type="sourse"
         position={Position.Bottom}
-        id="a"
+        id={`output-${data.id}`}
         isConnectable={isConnectable}
         style={{ borderRadius: '50%', width: '10px', height: '10px', background: 'white' }}
       />

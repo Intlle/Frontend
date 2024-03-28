@@ -1,26 +1,25 @@
-import React, { useState } from 'react';
+import React, {useEffect, useState } from 'react';
 
-export default function CardPage({ title, description, onTitleChange, onDescriptionChange, onAddNode }) {
+export default function CardPage({ title, description, onTitleChange, onDescriptionChange, onAddNode,  setCardPageTitle, onNodeLabelChange}) {
   const [currentTitle, setCurrentTitle] = useState(title);
 
   const handleTitleChange = (e) => {
     const newTitle = e.target.value;
     setCurrentTitle(newTitle);
     onTitleChange(newTitle);
+    setCardPageTitle(newTitle);
+    onNodeLabelChange(newTitle);
   };
-  const updateDescriptionTitle = (description, newTitle) => {
-    const startIndex = description.indexOf(title);
-    const endIndex = startIndex + title.length;
-    return description.substring(0, startIndex) + newTitle + description.substring(endIndex);
-  };
+ 
+  useEffect(() => {
+    setCurrentTitle(title);
+  }, [title]);
 
   const handleDescriptionChange = (e) => {
     const newDescription = e.target.value;
-    if (description.includes(title)) {
-      const updatedDescription = updateDescriptionTitle(newDescription, currentTitle);
-      onDescriptionChange(updatedDescription);
-    }
+    onDescriptionChange(newDescription); 
   };
+  
   const CardPageBlock = {
     backgroundColor: '#282f44',
     position: 'absolute',
@@ -57,9 +56,7 @@ export default function CardPage({ title, description, onTitleChange, onDescript
     color: 'white',
     fontSize: '16px',
     outline: 'none',
-    display: 'flex',
     alignItems: 'center',
-    justifyContent: 'center',
     textAlign: 'center',
     maxWidth: '100%',
     overflowY: 'auto',
